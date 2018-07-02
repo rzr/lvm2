@@ -207,8 +207,6 @@ int lvmcache_dev_is_unchosen_duplicate(struct device *dev);
 
 void lvmcache_remove_unchosen_duplicate(struct device *dev);
 
-int lvmcache_pvid_in_unchosen_duplicates(const char *pvid);
-
 int lvmcache_get_vg_devs(struct cmd_context *cmd,
 			 struct lvmcache_vginfo *vginfo,
 			 struct dm_list *devs);
