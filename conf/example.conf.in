@@ -57,7 +57,7 @@ devices {
 	# Configuration option devices/scan.
 	# Directories containing device nodes to use with LVM.
 	# This configuration option is advanced.
-	scan = [ "/dev" ]
+	scan = [ "/dev/disk/by-id" ]
 
 	# Configuration option devices/obtain_device_list_from_udev.
 	# Obtain the list of available devices from udev.
@@ -140,7 +140,7 @@ devices {
 	# This configuration option has an automatic default value.
 	# filter = [ "a|.*/|" ]
 
-	filter = [ "r|/dev/nbd|" ]
+	filter = [ "r|/dev/disk/by-id/dm-name-VG_XenStorage.*|",  "r|/dev/disk/by-id/dm-uuid-LVM-.*|", "r|/dev/disk/by-id/dm-name-XSLocal.*|" ]
 
 	# Configuration option devices/global_filter.
 	# Limit the block devices that are used by LVM system components.
