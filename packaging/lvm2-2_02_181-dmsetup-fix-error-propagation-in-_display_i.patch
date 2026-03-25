@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-2_02_181-dmsetup-fix-error-propagation-in-_display_info_cols
+
+tools/dmsetup.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+---
  tools/dmsetup.c | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
