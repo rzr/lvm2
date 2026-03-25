@@ -1,8 +1,18 @@
- WHATS_NEW                             |  1 +
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-lvconvert-fix-direct-raid0-to-striped-conversion
+
+WHATS_NEW                             |  1 +
  lib/metadata/raid_manip.c             |  3 +++
  test/shell/lvconvert-raid0-striped.sh | 25 +++++++++++++++++++++++++
  3 files changed, 29 insertions(+)
  create mode 100644 test/shell/lvconvert-raid0-striped.sh
+---
+ WHATS_NEW                                            |  1 +
+ lib/metadata/raid_manip.c                            |  3 +++
+ .../lvconvert-raid0-striped.sh}                      | 20 +++++++++++---------
+ 3 files changed, 15 insertions(+), 9 deletions(-)
+ copy test/{unit/unit-test.sh => shell/lvconvert-raid0-striped.sh} (69%)
 
 diff --git a/WHATS_NEW b/WHATS_NEW
 index 6560357..e3eee56 100644
@@ -29,29 +39,39 @@ index 705a7f9..804f78b 100644
  		/* If this is any raid5 conversion request -> enforce raid5_n, because we convert from striped */
  		else if (((segtype_is_striped(*segtype) && !segtype_is_any_raid0(*segtype)) || segtype_is_any_raid5(*segtype)) &&
  			 !segtype_is_raid5_n(*segtype))
-diff --git a/test/shell/lvconvert-raid0-striped.sh b/test/shell/lvconvert-raid0-striped.sh
-new file mode 100644
-index 0000000..4521b34
---- /dev/null
+diff --git a/test/unit/unit-test.sh b/test/shell/lvconvert-raid0-striped.sh
+similarity index 69%
+copy from test/unit/unit-test.sh
+copy to test/shell/lvconvert-raid0-striped.sh
+index e8332d6..4521b34 100644
+--- a/test/unit/unit-test.sh
 +++ b/test/shell/lvconvert-raid0-striped.sh
-@@ -0,0 +1,25 @@
+@@ -1,8 +1,7 @@
+-#!/bin/sh
 +#!/usr/bin/env bash
 +
-+# Copyright (C) 2018 Red Hat, Inc. All rights reserved.
-+#
-+# This copyrighted material is made available to anyone wishing to use,
-+# modify, copy, or redistribute it subject to the terms and conditions
-+# of the GNU General Public License v.2.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program; if not, write to the Free Software Foundation,
-+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-+
-+
+ # Copyright (C) 2018 Red Hat, Inc. All rights reserved.
+ #
+-# This file is part of LVM2.
+-#
+ # This copyrighted material is made available to anyone wishing to use,
+ # modify, copy, or redistribute it subject to the terms and conditions
+ # of the GNU General Public License v.2.
+@@ -11,13 +10,16 @@
+ # along with this program; if not, write to the Free Software Foundation,
+ # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ 
+-SKIP_WITH_LVMLOCKD=1
+-SKIP_WITH_LVMPOLLD=1
+-SKIP_WITH_LVMETAD=1
+-SKIP_WITH_CLVMD=1
+ 
+-SKIP_ROOT_DM_CHECK=1
 +SKIP_WITH_LVMPOLLD=1
-+
-+. lib/inittest
-+
+ 
+ . lib/inittest
+ 
+-aux unittest run
 +aux have_raid 1 7 0 || skip
 +
 +aux prepare_vg 3 16
