@@ -1,4 +1,3 @@
-From c43515c7ba1d13d54c92d43b76ca0a661c097292 Mon Sep 17 00:00:00 2001
 From: Heinz Mauelshagen <heinzm@redhat.com>
 Date: Fri, 31 Aug 2018 19:03:52 +0200
 Subject: [PATCH] lvconvert: avoid superfluous interim raid type
@@ -40,6 +39,3 @@ index d3e3a20..3eee77a 100644
  
  	/* raid6 -> striped/raid0/raid5/raid10 */
  	} else if (seg_is_any_raid6(seg_from)) {
--- 
-1.8.3.1
-
