@@ -1,4 +1,3 @@
-From 3ebce8dbd2d9afc031e0737f8feed796ec7a8df9 Mon Sep 17 00:00:00 2001
 From: David Teigland <teigland@redhat.com>
 Date: Tue, 5 Feb 2019 10:15:40 -0600
 Subject: [PATCH 1/1] apply obtain_device_list_from_udev to all libudev usage
@@ -11,8 +10,12 @@ obtain_device_list_from_udev config setting to also control
 whether these "is component" functions are used, which gives
 us a way to avoid using libudev entirely when it's causing
 problems.
+---
+ lib/device/dev-type.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
 diff --git a/lib/device/dev-type.c b/lib/device/dev-type.c
-index 331fe07265db..60b0d78e7627 100644
+index 331fe07..60b0d78 100644
 --- a/lib/device/dev-type.c
 +++ b/lib/device/dev-type.c
 @@ -1062,6 +1062,9 @@ int udev_dev_is_mpath_component(struct device *dev)
