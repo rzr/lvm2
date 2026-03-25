@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_181-dmeventd-rebase-to-stable-branch
+
+daemons/dmeventd/plugins/vdo/dmeventd_vdo.c | 39 +++++++++++++++++++----------
+ 1 file changed, 26 insertions(+), 13 deletions(-)
+---
  daemons/dmeventd/plugins/vdo/dmeventd_vdo.c | 39 +++++++++++++++++++----------
  1 file changed, 26 insertions(+), 13 deletions(-)
 
