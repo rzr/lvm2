@@ -1,3 +1,13 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-fix-clustered-mirror-repair
+
+WHATS_NEW               |  1 +
+ lib/activate/activate.c |  3 +--
+ tools/lvchange.c        | 28 +++++++++++++++++++---------
+ tools/vgchange.c        | 15 +++++++++++++--
+ 4 files changed, 34 insertions(+), 13 deletions(-)
+---
  WHATS_NEW               |  1 +
  lib/activate/activate.c |  3 +--
  tools/lvchange.c        | 28 +++++++++++++++++++---------
