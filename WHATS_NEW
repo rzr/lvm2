@@ -1,3 +1,7 @@
+Version 2.02.182 - 
+==============================
+  Do not pair cache policy and cache metadata format.
+
 Version 2.02.181 - 
 =================================
   Reject conversions on raid1 LVs with split tracked SubLVs.
