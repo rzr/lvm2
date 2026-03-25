@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_183-build-make-generate
+
+conf/example.conf.in | 5 +++++
+ 1 file changed, 5 insertions(+)
+---
  conf/example.conf.in | 5 +++++
  1 file changed, 5 insertions(+)
 
