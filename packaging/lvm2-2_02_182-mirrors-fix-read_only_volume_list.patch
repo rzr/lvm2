@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-mirrors-fix-read_only_volume_list
+
+lib/activate/activate.c | 2 ++
+ 1 file changed, 2 insertions(+)
+---
  lib/activate/activate.c | 2 ++
  1 file changed, 2 insertions(+)
 
