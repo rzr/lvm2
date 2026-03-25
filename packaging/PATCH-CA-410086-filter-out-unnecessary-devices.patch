@@ -1,4 +1,3 @@
-From 60b9952e9c0d7b563815f50c9c78f929f6cf04ba Mon Sep 17 00:00:00 2001
 From: Mark Syms <mark.syms@cloud.com>
 Date: Tue, 29 Apr 2025 18:10:53 +0100
 Subject: [PATCH] CA-410086: filter out unnecessary devices
@@ -14,8 +13,12 @@ commands performing a lot of unnecessary work by
 Restrict the search and add filter exclusions to avoid both of these
 and perform less work in the scan operations which form a core part of
 the SR control plane operations.
+---
+ conf/example.conf.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
 diff --git a/conf/example.conf.in b/conf/example.conf.in
-index 94c87293a..a3f836409 100644
+index 94c8729..a3f8364 100644
 --- a/conf/example.conf.in
 +++ b/conf/example.conf.in
 @@ -57,7 +57,7 @@ devices {
