@@ -1,9 +1,17 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-default-allow-changes-with-duplicate-pvs
+
+conf/example.conf.in  | 2 +-
+ lib/config/defaults.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+---
  conf/example.conf.in  | 2 +-
  lib/config/defaults.h | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/conf/example.conf.in b/conf/example.conf.in
-index 4894d04..48afbd1 100644
+index 32267e7..cd58615 100644
 --- a/conf/example.conf.in
 +++ b/conf/example.conf.in
 @@ -311,7 +311,7 @@ devices {
@@ -16,7 +24,7 @@ index 4894d04..48afbd1 100644
  
  # Configuration section allocation.
 diff --git a/lib/config/defaults.h b/lib/config/defaults.h
-index d9e19d9..894b979 100644
+index 7cebd84..1a11009 100644
 --- a/lib/config/defaults.h
 +++ b/lib/config/defaults.h
 @@ -45,7 +45,7 @@
