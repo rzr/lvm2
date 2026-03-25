@@ -1,3 +1,11 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-2_02_181-post-release
+
+WHATS_NEW    | 3 +++
+ WHATS_NEW_DM | 3 +++
+ 2 files changed, 6 insertions(+)
+---
  WHATS_NEW    | 3 +++
  WHATS_NEW_DM | 3 +++
  2 files changed, 6 insertions(+)
