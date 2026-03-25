@@ -1,13 +1,18 @@
-From 7d11e75581640a79014d41532c570e4a5d7b2a62 Mon Sep 17 00:00:00 2001
 From: Liang Dai <liang.dai1@citrix.com>
 Date: Mon, 2 Jul 2018 19:31:30 +0800
-Subject: [PATCH] [PATCH] Revert "vgcreate, pvcreate, vgextend: don't use a
- device with  duplicates
+Subject: [PATCH] [PATCH] Revert "vgcreate, pvcreate,
+ vgextend: don't use a device with  duplicates
 
 This reverts commit 86f92714574487cce6a9de785ba2ff93b23a98f7.
 
 There is a scenario in a enviroment with remote storage and multiple
 paths should work.
+---
+ lib/cache/lvmcache.c | 11 -----------
+ lib/cache/lvmcache.h |  2 --
+ tools/toollib.c      |  9 ---------
+ 3 files changed, 22 deletions(-)
+
 diff --git a/lib/cache/lvmcache.c b/lib/cache/lvmcache.c
 index f55a14c..d135967 100644
 --- a/lib/cache/lvmcache.c
@@ -47,10 +52,11 @@ diff --git a/tools/toollib.c b/tools/toollib.c
 index e1c86f9..bab9f70 100644
 --- a/tools/toollib.c
 +++ b/tools/toollib.c
-@@ -5097,15 +5097,6 @@ static int _pvcreate_check_single(struct cmd_context *cmd,
+@@ -5096,15 +5096,6 @@ static int _pvcreate_check_single(struct cmd_context *cmd,
+ 		  pv_dev_name(pv), pv->dev->pvid[0] ? pv->dev->pvid : "<none>");
  
  
- 	/*
+-	/*
 -	 * Don't allow using a device with duplicates.
 -	 */
 -	if (lvmcache_pvid_in_unchosen_duplicates(pd->dev->pvid)) {
@@ -59,7 +65,6 @@ index e1c86f9..bab9f70 100644
 -		return 1;
 -	}
 -
--	/*
+ 	/*
  	 * What kind of device is this: an orphan PV, an uninitialized/unused
  	 * device, a PV used in a VG.
- 	 */
