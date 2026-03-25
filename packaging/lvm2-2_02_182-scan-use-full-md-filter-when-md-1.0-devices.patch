@@ -1,3 +1,15 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-scan-use-full-md-filter-when-md-1.0-devices-are-pres
+
+lib/cache/lvmcache.c               |  2 +-
+ lib/device/dev-md.c                | 27 ++++++++++----
+ lib/device/dev-type.h              |  1 +
+ lib/filters/filter-md.c            | 74 +++++++++++++++++++-------------------
+ lib/label/label.c                  | 14 ++++++++
+ test/shell/pvcreate-md-fake-hdr.sh |  3 +-
+ 6 files changed, 75 insertions(+), 46 deletions(-)
+---
  lib/cache/lvmcache.c               |  2 +-
  lib/device/dev-md.c                | 27 ++++++++++----
  lib/device/dev-type.h              |  1 +
