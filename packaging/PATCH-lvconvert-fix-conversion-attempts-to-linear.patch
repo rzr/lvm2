@@ -1,4 +1,3 @@
-From 83b93f9f5a72ac67f63e6be2c25ce4b3919c4c84 Mon Sep 17 00:00:00 2001
 From: Heinz Mauelshagen <heinzm@redhat.com>
 Date: Wed, 22 Aug 2018 16:39:36 +0200
 Subject: [PATCH] lvconvert: fix conversion attempts to linear
@@ -263,6 +262,3 @@ index f01e7ef..05cb616 100644
  
  # Remove reshape space
  lvconvert -y --type raid6 --stripes 3 --stripesize 64K --regionsize 128K $vg/$lv
--- 
-1.8.3.1
-
