@@ -1,4 +1,8 @@
-Version 1.02.151 - 
+Version 1.02.154 - 
+==============================
+  Fix dmstats report printing no output.
+
+Version 1.02.152 - 
 ==============================
   Add hot fix to avoiding locking collision when monitoring thin-pools.
 

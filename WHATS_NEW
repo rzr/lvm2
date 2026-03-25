@@ -1,5 +1,6 @@
 Version 2.02.183 - 
-====================================
+=====================================
+  Fix component detection for md version 0.90.
   Use sync io if async io_setup fails, or use_aio=0 is set in config.
 
 Version 2.02.182 - 
