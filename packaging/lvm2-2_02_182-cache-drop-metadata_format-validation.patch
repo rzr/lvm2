@@ -1,3 +1,11 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-cache-drop-metadata_format-validation
+
+WHATS_NEW                  | 4 ++++
+ lib/metadata/cache_manip.c | 5 -----
+ 2 files changed, 4 insertions(+), 5 deletions(-)
+---
  WHATS_NEW                  | 4 ++++
  lib/metadata/cache_manip.c | 5 -----
  2 files changed, 4 insertions(+), 5 deletions(-)
