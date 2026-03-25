@@ -1,3 +1,7 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: allow_lv_change_with_metadata_ro
+
 # HG changeset patch
 # Parent 316661c98f32cb9ae013623c08ed505db7ee055a
 # User Stefano Panella <stefano.panella@citrix.com>
@@ -13,8 +17,12 @@ need to prevent lvchange from running.
 
 Signed-off-by: Stefano Panella <stefano.panella@citrix.com>
 Acked-by: Germano Percossi <germano.percossi@citrix.com>
+---
+ lib/locking/locking.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/lib/locking/locking.c b/lib/locking/locking.c
+index 2b53553..3106c1f 100644
 --- a/lib/locking/locking.c
 +++ b/lib/locking/locking.c
 @@ -23,6 +23,7 @@
@@ -25,7 +33,7 @@ diff --git a/lib/locking/locking.c b/lib/locking/locking.c
  
  #include <assert.h>
  #include <sys/stat.h>
-@@ -265,8 +266,12 @@
+@@ -293,8 +294,12 @@ static int _lock_vol(struct cmd_context *cmd, const char *resource,
  		goto out;
  	}
  
