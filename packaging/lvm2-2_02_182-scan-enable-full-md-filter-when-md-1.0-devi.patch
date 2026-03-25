@@ -1,3 +1,11 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-scan-enable-full-md-filter-when-md-1.0-devices-are-p
+
+lib/filters/filter-md.c | 33 +++++++--------------------------
+ lib/label/label.c       | 13 ++++++++++++-
+ 2 files changed, 19 insertions(+), 27 deletions(-)
+---
  lib/filters/filter-md.c | 33 +++++++--------------------------
  lib/label/label.c       | 13 ++++++++++++-
  2 files changed, 19 insertions(+), 27 deletions(-)
