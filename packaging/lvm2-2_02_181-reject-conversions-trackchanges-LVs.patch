@@ -1,3 +1,12 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-2_02_181-reject-conversions-trackchanges-LVs
+
+WHATS_NEW                                        | 1 +
+ test/shell/lvconvert-raid1-split-trackchanges.sh | 7 +++++++
+ tools/lvconvert.c                                | 6 ++++++
+ 3 files changed, 14 insertions(+)
+---
  WHATS_NEW                                        | 1 +
  test/shell/lvconvert-raid1-split-trackchanges.sh | 7 +++++++
  tools/lvconvert.c                                | 6 ++++++
