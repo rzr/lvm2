@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_183-libdm-stats-move-no-regions-warning-after-dm_stats_l
+
+libdm/libdm-stats.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+---
  libdm/libdm-stats.c | 10 +++++-----
  1 file changed, 5 insertions(+), 5 deletions(-)
 
