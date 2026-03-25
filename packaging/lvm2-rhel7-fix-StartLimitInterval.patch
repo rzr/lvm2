@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-rhel7-fix-StartLimitInterval
+
+scripts/lvm2_pvscan_systemd_red_hat@.service.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+---
  scripts/lvm2_pvscan_systemd_red_hat@.service.in | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
