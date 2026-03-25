@@ -1,3 +1,10 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_183-bcache-sync-io-fixes
+
+lib/device/bcache.c | 69 ++++++++++++++++++++++++++++++++++++-----------------
+ 1 file changed, 47 insertions(+), 22 deletions(-)
+---
  lib/device/bcache.c | 69 ++++++++++++++++++++++++++++++++++++-----------------
  1 file changed, 47 insertions(+), 22 deletions(-)
 
