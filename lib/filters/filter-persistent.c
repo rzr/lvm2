@@ -17,6 +17,7 @@
 #include "filter.h"
 #include "config.h"
 #include "lvm-file.h"
+#include <dirent.h>
 
 struct pfilter {
 	char *file;
@@ -59,6 +60,8 @@ static char* _bad_device = "bad";
  */
 #define PF_BAD_DEVICE ((void *) &_good_device)
 #define PF_GOOD_DEVICE ((void *) &_bad_device)
+
+static int _from_env = 0;
 
 static int _init_hash(struct pfilter *pf)
 {
@@ -110,12 +113,75 @@ static int _read_array(struct pfilter *pf, struct dm_config_tree *cft,
 	return 1;
 }
 
+static char *_join(const char *dir, const char *name)
+{
+	size_t len = strlen(dir) + strlen(name) + 2;
+	char *r = dm_malloc(len);
+	if (r)
+		snprintf(r, len, "%s/%s", dir, name);
+	return r;
+}
+
+/*
+ * Get rid of extra slashes in the path string.
+ */
+static void _collapse_slashes(char *str)
+{
+	char *ptr;
+	int was_slash = 0;
+	for (ptr = str; *ptr; ptr++) {
+		if (*ptr == '/') {
+			if (was_slash)
+				continue;	
+			was_slash = 1;
+		} else
+			was_slash = 0;
+		*str++ = *ptr;
+	}
+	*str = *ptr;
+}
+
 int persistent_filter_load(struct dev_filter *f, struct dm_config_tree **cft_out)
 {
 	struct pfilter *pf = (struct pfilter *) f->private;
 	struct dm_config_tree *cft;
 	struct stat info;
 	int r = 0;
+	int n, dirent_count;
+	struct dirent **dirent;
+	char *path;
+	char *envdir = getenv("LVM_DEVICE");
+
+	if(!cft_out && envdir) {
+		dirent_count = scandir(envdir, &dirent, NULL, alphasort);
+		if (dirent_count > 0) {
+			for (n = 0; n < dirent_count; n++) {
+				if (dirent[n]->d_name[0] == '.') {
+					free(dirent[n]);
+					continue;
+				}
+
+				if (!(path = _join(envdir, dirent[n]->d_name)))
+					return_0;
+
+				_collapse_slashes(path);
+				if(dm_hash_insert(pf->devices, path,
+						  PF_GOOD_DEVICE)) {
+					dev_cache_get(path, NULL);
+				}
+				dm_free(path);
+				free(dirent[n]);
+			}
+			free(dirent);
+		}
+
+		if (dm_hash_get_num_entries(pf->devices)) {
+			/* We populated dev_cache ourselves */
+			dev_cache_set_scanned(1);
+			_from_env = 1;
+			return 1;
+		}
+	}
 
 	if (obtain_device_list_from_udev()) {
 		if (!stat(pf->file, &info)) {
@@ -199,6 +265,10 @@ static int _persistent_filter_dump(struct dev_filter *f, int merge_existing)
 	FILE *fp;
 	int lockfd;
 	int r = 0;
+
+	if(_from_env) {
+		return 1;
+	}
 
 	if (obtain_device_list_from_udev())
 		return 1;

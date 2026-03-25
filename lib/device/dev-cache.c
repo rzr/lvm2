@@ -1205,6 +1205,11 @@ static int _insert(const char *path, const struct stat *info,
 	return 1;
 }
 
+void dev_cache_set_scanned(int scanned)
+{
+	_cache.has_scanned = scanned;
+}
+
 void dev_cache_scan(void)
 {
 	struct dir_list *dl;

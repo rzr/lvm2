@@ -1284,7 +1284,7 @@ int init_filters(struct cmd_context *cmd, unsigned load_persistent_cache)
 
 	if (!*cmd->system_dir)
 		cmd->dump_filter = 0;
-
+#if 0
 	/*
 	 * Only load persistent filter device cache on startup if it is newer
 	 * than the config file and this is not a long-lived process. Also avoid
@@ -1300,6 +1300,8 @@ int init_filters(struct cmd_context *cmd, unsigned load_persistent_cache)
 			log_verbose("Failed to load existing device cache from %s",
 				    dev_cache);
 	}
+#endif
+	persistent_filter_load(cmd->filter, NULL);
 
 	cmd->initialized.filters = 1;
 	return 1;

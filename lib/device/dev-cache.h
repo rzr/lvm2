@@ -47,6 +47,7 @@ int dev_cache_exit(void);
 int dev_cache_check_for_open_devices(void);
 
 void dev_cache_scan(void);
+void dev_cache_set_scanned(int);
 int dev_cache_has_scanned(void);
 
 int dev_cache_add_dir(const char *path);
