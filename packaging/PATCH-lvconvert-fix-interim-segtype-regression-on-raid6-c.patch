@@ -1,4 +1,3 @@
-From 2ee0f6d4ddd6c602def295e3b1dfccbd8a50a4c8 Mon Sep 17 00:00:00 2001
 From: Heinz Mauelshagen <heinzm@redhat.com>
 Date: Fri, 7 Sep 2018 13:48:13 +0200
 Subject: [PATCH] lvconvert: fix interim segtype regression on raid6
@@ -88,6 +87,3 @@ index d1c5d30..d22c11b 100644
  _lvcreate raid0 3 3 4m $vg $lv1
  _lvconvert raid6 raid6_n_6 3 5 $vg $lv1
  lvremove -y $vg
--- 
-1.8.3.1
-
