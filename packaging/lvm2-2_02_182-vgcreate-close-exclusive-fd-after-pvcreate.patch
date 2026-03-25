@@ -1,3 +1,11 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_182-vgcreate-close-exclusive-fd-after-pvcreate
+
+lib/label/label.c | 6 +++---
+ tools/toollib.c   | 7 +++++++
+ 2 files changed, 10 insertions(+), 3 deletions(-)
+---
  lib/label/label.c | 6 +++---
  tools/toollib.c   | 7 +++++++
  2 files changed, 10 insertions(+), 3 deletions(-)
