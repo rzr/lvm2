@@ -1,3 +1,13 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_183-pvscan-lvmetad-use-udev-info-to-improve-md-component
+
+lib/device/dev-md.c   | 14 ++++++++++--
+ lib/device/dev-type.c | 62 +++++++++++++++++++++++++++++++++++++++++----------
+ lib/device/dev-type.h |  1 +
+ tools/pvscan.c        |  3 ++-
+ 4 files changed, 65 insertions(+), 15 deletions(-)
+---
  lib/device/dev-md.c   | 14 ++++++++++--
  lib/device/dev-type.c | 62 +++++++++++++++++++++++++++++++++++++++++----------
  lib/device/dev-type.h |  1 +
