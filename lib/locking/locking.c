@@ -23,6 +23,7 @@
 #include "defaults.h"
 #include "lvmcache.h"
 #include "lvm-signal.h"
+#include "../../tools/tools.h"
 
 #include <assert.h>
 #include <sys/stat.h>
@@ -293,8 +294,12 @@ static int _lock_vol(struct cmd_context *cmd, const char *resource,
 		goto out;
 	}
 
-	if (cmd->metadata_read_only && lck_type == LCK_WRITE &&
-	    strcmp(resource, VG_GLOBAL)) {
+	if (cmd->command != NULL &&
+	    cmd->command->name != NULL &&
+	    !strcmp(cmd->command->name, "lvchange")) {
+		;
+	} else if (cmd->metadata_read_only && lck_type == LCK_WRITE &&
+		strcmp(resource, VG_GLOBAL)) {
 		log_error("Operation prohibited while global/metadata_read_only is set.");
 		goto out;
 	}
