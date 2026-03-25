@@ -1,5 +1,13 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: udev-rule-to-stop-device-mapper-running-blkid-on
+
+---
+ udev/13-dm-disk.rules.in | 3 +++
+ 1 file changed, 3 insertions(+)
+
 diff --git a/udev/13-dm-disk.rules.in b/udev/13-dm-disk.rules.in
-index 4b64dd6..e1c2edc 100644
+index 5355810..e0b7b49 100644
 --- a/udev/13-dm-disk.rules.in
 +++ b/udev/13-dm-disk.rules.in
 @@ -17,6 +17,9 @@ ENV{DM_UDEV_DISABLE_DISK_RULES_FLAG}=="1", GOTO="dm_end"
