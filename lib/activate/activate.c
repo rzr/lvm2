@@ -2061,8 +2061,7 @@ int monitor_dev_for_events(struct cmd_context *cmd, const struct logical_volume 
 		} else
 			continue;
 
-		if (!vg_write_lock_held() && lv_is_mirror(lv)) {
-			mirr_laopts.exclusive = lv_is_active_exclusive_locally(lv) ? 1 : 0;
+		if (!cmd->is_clvmd && !vg_write_lock_held() && lv_is_mirror(lv)) {
 			/*
 			 * Commands vgchange and lvchange do use read-only lock when changing
 			 * monitoring (--monitor y|n). All other use cases hold 'write-lock'
