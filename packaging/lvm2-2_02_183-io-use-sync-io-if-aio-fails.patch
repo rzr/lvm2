@@ -1,3 +1,16 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: lvm2-2_02_183-io-use-sync-io-if-aio-fails
+
+lib/commands/toolcontext.c   |  2 ++
+ lib/config/config_settings.h |  3 +++
+ lib/config/defaults.h        |  1 +
+ lib/device/bcache.c          | 42 ++++++++++++++++++++++++++++++++++++++++++
+ lib/label/label.c            | 17 +++++++++++++----
+ lib/misc/lvm-globals.c       | 11 +++++++++++
+ lib/misc/lvm-globals.h       |  2 ++
+ 7 files changed, 74 insertions(+), 4 deletions(-)
+---
  lib/commands/toolcontext.c   |  2 ++
  lib/config/config_settings.h |  3 +++
  lib/config/defaults.h        |  1 +
