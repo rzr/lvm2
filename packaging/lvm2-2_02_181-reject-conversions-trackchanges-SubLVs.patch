@@ -1,8 +1,18 @@
- WHATS_NEW                                        |  1 +
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:46 +0100
+Subject: lvm2-2_02_181-reject-conversions-trackchanges-SubLVs
+
+WHATS_NEW                                        |  1 +
  test/shell/lvconvert-raid1-split-trackchanges.sh | 36 +++++++++++++++++++
  tools/lvconvert.c                                | 45 ++++++++++++++++++++++++
  3 files changed, 82 insertions(+)
  create mode 100644 test/shell/lvconvert-raid1-split-trackchanges.sh
+---
+ WHATS_NEW                                          |  1 +
+ ...id.sh => lvconvert-raid1-split-trackchanges.sh} | 42 +++++++-------------
+ tools/lvconvert.c                                  | 45 ++++++++++++++++++++++
+ 3 files changed, 60 insertions(+), 28 deletions(-)
+ copy test/shell/{component-raid.sh => lvconvert-raid1-split-trackchanges.sh} (50%)
 
 diff --git a/WHATS_NEW b/WHATS_NEW
 index bdd2fa6..7c74c50 100644
@@ -15,47 +25,68 @@ index bdd2fa6..7c74c50 100644
  
  Version 2.02.180 - 19th July 2018
  =================================
-diff --git a/test/shell/lvconvert-raid1-split-trackchanges.sh b/test/shell/lvconvert-raid1-split-trackchanges.sh
-new file mode 100644
-index 0000000..e25a632
---- /dev/null
+diff --git a/test/shell/component-raid.sh b/test/shell/lvconvert-raid1-split-trackchanges.sh
+similarity index 50%
+copy from test/shell/component-raid.sh
+copy to test/shell/lvconvert-raid1-split-trackchanges.sh
+index bff56d4..e25a632 100644
+--- a/test/shell/component-raid.sh
 +++ b/test/shell/lvconvert-raid1-split-trackchanges.sh
-@@ -0,0 +1,36 @@
-+#!/usr/bin/env bash
-+
-+# Copyright (C) 2018 Red Hat, Inc. All rights reserved.
-+#
-+# This copyrighted material is made available to anyone wishing to use,
-+# modify, copy, or redistribute it subject to the terms and conditions
-+# of the GNU General Public License v.2.
-+#
-+# You should have received a copy of the GNU General Public License
-+# along with this program; if not, write to the Free Software Foundation,
-+# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
-+
-+
-+SKIP_WITH_LVMPOLLD=1
-+
-+. lib/inittest
-+
+@@ -10,41 +10,27 @@
+ # along with this program; if not, write to the Free Software Foundation,
+ # Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ 
+-# Exercise activation of raid component devices
+-
+ 
+ SKIP_WITH_LVMPOLLD=1
+ 
+ . lib/inittest
+ 
+-aux have_raid 1 3 0 || skip
+-
+-aux prepare_vg 5 80
 +# rhbz1579072/rhbz1579438
-+
+ 
+-lvcreate --type raid1 -L 2 -m 1 -n $lv1 $vg
+-lvchange -an $vg
+-
+-lvs -a $vg
+-
+-for k in 1 2
+-do
 +aux have_raid 1 3 0 || skip
-+
+ 
+-# Activate supported components
+-for j in 0 1
+-do
+-for i in ${lv1}_rimage_$j ${lv1}_rmeta_$j
+-do
+-	test ! -e "$DM_DEV_DIR/$vg/$i"
+-	lvchange -ay -y $vg/$i
+-	# check usable link is there
+-	test -e "$DM_DEV_DIR/$vg/$i"
+-done
+-done
 +# 8 PVs needed for RAID10 testing (4-stripes/2-mirror)
 +aux prepare_pvs 4 2
 +get_devs
 +vgcreate $SHARED -s 512k "$vg" "${DEVICES[@]}"
-+
+ 
+-# Deactivation works in 1st. pass
+-test $k -eq 2 || lvchange -an $vg
 +lvcreate -y --ty raid1 -m 2 -n $lv1 -l 1 $vg
 +lvconvert -y --splitmirrors 1 --trackchanges $vg/$lv1
-+
+ 
+-done
 +not lvconvert -y --ty striped -m 1 $vg/${lv1}_rimage_2
 +not lvconvert -y --ty raid1 -m 1 $vg/${lv1}_rimage_2
 +not lvconvert -y --ty mirror -m 1 $vg/${lv1}_rimage_2
 +not lvconvert -y --ty cache-pool $vg/${lv1}_rimage_2
 +not lvconvert -y --ty thin-pool $vg/${lv1}_rimage_2
-+
+ 
+-# And final removal works
+-vgremove -f $vg
 +vgremove -ff $vg
 diff --git a/tools/lvconvert.c b/tools/lvconvert.c
 index 3fad02c..079c3cd 100644
