@@ -1,3 +1,7 @@
+From: Philippe Coval <philippe.coval@vates.tech>
+Date: Wed, 25 Mar 2026 17:37:47 +0100
+Subject: scan_only_the_device_in_LVM_DEVICE_env
+
 # HG changeset patch
 # Parent 7b8ebdb0f36facb7a22564dd0da5247f2d97d459
 Only scan the physical devices passed via LVM_DEVICE env var
@@ -14,9 +18,15 @@ From: Stefano Panella <Stefano.Panella@citrix.com>
 
 Signed-off-by: Stefano Panella <stefano.panella@citrix.com>
 Reviewed-by: Germano Percossi <germano.percossi@citrix.com>
+---
+ lib/commands/toolcontext.c      |  4 ++-
+ lib/device/dev-cache.c          |  5 +++
+ lib/device/dev-cache.h          |  1 +
+ lib/filters/filter-persistent.c | 70 +++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 79 insertions(+), 1 deletion(-)
 
 diff --git a/lib/commands/toolcontext.c b/lib/commands/toolcontext.c
-index 4d3f74402404..46bdb0d1c666 100644
+index 4d3f744..46bdb0d 100644
 --- a/lib/commands/toolcontext.c
 +++ b/lib/commands/toolcontext.c
 @@ -1284,7 +1284,7 @@ int init_filters(struct cmd_context *cmd, unsigned load_persistent_cache)
@@ -38,7 +48,7 @@ index 4d3f74402404..46bdb0d1c666 100644
  	cmd->initialized.filters = 1;
  	return 1;
 diff --git a/lib/device/dev-cache.c b/lib/device/dev-cache.c
-index c866ff903319..5897343f2c76 100644
+index c866ff9..5897343 100644
 --- a/lib/device/dev-cache.c
 +++ b/lib/device/dev-cache.c
 @@ -1205,6 +1205,11 @@ static int _insert(const char *path, const struct stat *info,
@@ -54,7 +64,7 @@ index c866ff903319..5897343f2c76 100644
  {
  	struct dir_list *dl;
 diff --git a/lib/device/dev-cache.h b/lib/device/dev-cache.h
-index df6ba0e73993..961fbe291154 100644
+index df6ba0e..961fbe2 100644
 --- a/lib/device/dev-cache.h
 +++ b/lib/device/dev-cache.h
 @@ -47,6 +47,7 @@ int dev_cache_exit(void);
@@ -66,7 +76,7 @@ index df6ba0e73993..961fbe291154 100644
  
  int dev_cache_add_dir(const char *path);
 diff --git a/lib/filters/filter-persistent.c b/lib/filters/filter-persistent.c
-index 1d24af86426d..099905f91e42 100644
+index 1d24af8..099905f 100644
 --- a/lib/filters/filter-persistent.c
 +++ b/lib/filters/filter-persistent.c
 @@ -17,6 +17,7 @@
